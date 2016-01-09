@@ -1,0 +1,35 @@
+class BigBurger:
+	def maxWait(self, arrival, service):
+		curi = 0
+		time = arrival[curi]
+		wait = 0
+		l = len(arrival)
+		while True:
+			if (curi < l):
+				if (arrival[curi] <= time):
+					nwait = time - arrival[curi]
+					if nwait > wait :
+						wait = nwait
+					time += service[curi]
+					curi += 1
+				else:
+					time +=1
+				print(time, wait)
+			else :
+				break
+		return wait
+
+
+
+test = ([3,3,9],[2,15,14])
+
+d = BigBurger()
+print(d.maxWait(*test))
+
+'''
+Returns: 11
+Two customers arrive at time 3. The first one waits 0 time, orders, and is served after 2 minutes, leaving at time 5. 
+The second one then orders and is served at time 20. Meanwhile a customer arrives at time 9 and waits until the second customer leaves.
+ This last customer then orders at time 20, and is served and leaves at time 20+14 = 34. The first customer waited 0 minutes, the second 
+ waited 2 minutes (from time 3 to time 5), and the last customer waited 11 minutes (from time 9 to time 20).
+'''
